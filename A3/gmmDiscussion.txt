@@ -1,0 +1,86 @@
+Note that since distinct sets of training and test data would affect the results produced by the algorithm. Therefore,
+in order to eliminate the effect of the factor of the randomness on the algorithm output, set the random seed to be 0.
+
+Test M with maxIter = 20 and Speakers = 32 
+
+M: 1 	 Accuracy:  0.9688 
+M: 2 	 Accuracy:  1.0000 
+M: 3 	 Accuracy:  1.0000 
+M: 5 	 Accuracy:  1.0000 
+M: 7 	 Accuracy:  1.0000 
+M: 8 	 Accuracy:  1.0000 
+M: 10 	 Accuracy:  1.0000 
+M: 12 	 Accuracy:  1.0000 
+M: 18 	 Accuracy:  1.0000 
+M: 25 	 Accuracy:  1.0000 
+
+Discussion: Based on the accuracies produced above, we are able to see that the classification accuracy would decrease while M decreases, where M is the number of the Gaussian models in the mixture. This makes sense since the smaller number of the Gaussion models sometimes would not be able to fit the data properly and correctly. Therefore, the trained mixture Gaussion model for each speaker would not be able to generate an accurate prediction for each test utterance since the characteristics of the training data for the speaker are not well-represented. Hence, it is not surprised that the classification accuracy would decrease in this case.
+
+
+
+Test maxIter with M = 8 and Speakers = 32 
+
+maxIter: 0 	 Accuracy:  0.9688 
+maxIter: 1 	 Accuracy:  1.0000 
+maxIter: 3 	 Accuracy:  1.0000 
+maxIter: 5 	 Accuracy:  1.0000 
+maxIter: 7 	 Accuracy:  1.0000 
+maxIter: 10 	 Accuracy:  0.9688 
+maxIter: 15 	 Accuracy:  1.0000 
+maxIter: 20 	 Accuracy:  1.0000 
+maxIter: 30 	 Accuracy:  1.0000 
+maxIter: 50 	 Accuracy:  1.0000 
+
+Discussion: According to the accuracies generated above, the classification accuracy first shows an increasing trend and then reveals a decreasing trend and then increases again as the number of the maximum iterations increases. The increasing trend is because the model still learns the information from the training data and fits more and more accurate to the training data. However, at a certain point, in this case when the maxIter equals to 10, the overfit occurs. Therefore, the classification accuracy decreases at that point and then increases afterwards. When the overfit occurs, the model trained learns too much information from the training data and fits the training data too well. Thus, the model also fits the noises of the training data. This would cause the inaccuracies in the classification process and leads a decrease in the classification accuracy.
+
+
+
+Test Speakers with M = 8 and maxIter = 20 
+
+Total Speakers: 1 	 Accuracy:  1.0000 
+Total Speakers: 5 	 Accuracy:  1.0000 
+Total Speakers: 8 	 Accuracy:  1.0000 
+Total Speakers: 15 	 Accuracy:  1.0000 
+Total Speakers: 20 	 Accuracy:  1.0000 
+Total Speakers: 25 	 Accuracy:  1.0000 
+Total Speakers: 32 	 Accuracy:  1.0000 
+
+Discussion: As we can see that if the number of speakers for both test and training data set decreases (no unknown speakers in this case, simply use less speakers), then this would not have any affect on the classification accuracy. Note that the test and training data set are formed by splitting the whole observations randomly of each speaker into the test and the training set. Therefore, this means that if the total number of speakers decreases would not affect the test accuracies as long as there are no unknown speakers occurred in the training data set.
+
+
+
+Test Speakers with M = 8 and maxIter = 20 and totalSpeakers = 32
+
+Known Training Speakers: 1 	 Accuracy:  0.0312 
+Known Training Speakers: 5 	 Accuracy:  0.1562 
+Known Training Speakers: 8 	 Accuracy:  0.2500 
+Known Training Speakers: 15 	 Accuracy:  0.4688 
+Known Training Speakers: 20 	 Accuracy:  0.6250 
+Known Training Speakers: 25 	 Accuracy:  0.7812 
+Known Training Speakers: 32 	 Accuracy:  1.0000 
+
+Discussion: In this case, we see how the number of unknown speakers in the training data set would affect the classification accuracy. So, we keep 32 speakers in total, some are known speakers who are the ones we have observations collected and some are unknown speakers who do not have any information in our data set. Therefore, as you can see. as the number of unknown speakers increases (the known speakers decreases), the classification accuracy decreases by a noticeable amount. This makes sense since the model trained only contains the information of each of the known speakers. Therefore, it would assign a "known speaker name" to an unknown speaker during the classification process. Thus, the classification accuracy would not be good.
+
+
+
+Additional Questions
+
+Question 1: How might you improve the classification accuracy of the Gaussian mixtures, without adding more
+training data?
+
+Answer for Question 1: I would increase the number of Gaussian models in the mixture. Based on the experiments above, as the number of the mixed Gaussian models increases, the classification accuracy enhances as well. Otherwise, I would like to increase the number of the maximum iterations in order to learn sufficient information about the training data set in order to make a more accurate prediction, which is able to improve the classification accuracy as well. However, it needs to be careful for the overfit issue as discussed above.
+
+
+
+Question 2: When would your classifier decide that a given test utterance comes from none of the trained speaker
+models, and how would your classifier come to this decision?
+
+Answer for Question 2: The classifier decide that a given test utterance comes from none of the trained speaker models when all the likelihoods computed based on each trained model are very low to zero, which means that it is impossible that the speaker tested is one of the trained speakers. This situation would occur only when the bm values are all zeros since each likelihood is computed by the sum of the weighted bws. As we know that it is impossible for all w (omega) values to be zero. Therefore, we can conclude that the above situation is only due to the all zero bm values. Since our classifier uses log likelihood, then the log likelihood reaches negative infinity when likelihood equals to 0, which implies that the test utterance comes from an unknown speaker.
+
+
+
+Question 3: Can you think of some alternative methods for doing speaker identification that don't use Gaussian
+mixtures?
+
+Answer for Question 3: Based on my opinion, KNN (k nearest neighbours) and CNN (convolutional neural network) would be some good alternatives, especially using CNN since it generally produces a good classification accuracy.
+

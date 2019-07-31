@@ -1,0 +1,7 @@
+0.341875,0.26775,0.437625,0.425,0.4815
+0.392125,0.34,0.44675,0.460125,0.481625
+0.39225,0.335375,0.434875,0.4405,0.470375
+0.395875,0.281375,0.443875,0.4275,0.478625
+0.390125,0.352125,0.440375,0.387,0.480375
+0.000988285,0.000753124,3.05E-05,0.015763885,
+"No matter what the training samples are, the AdaBoostClassifier, which is the best classifier obtained in class31, always yields the higher accuracy. Based on the p-values attained from t-test, we are able to conclude that the null hypothesis would not be rejected, which means that other classifier can not produce similar performance as AdaBoostClassifier does. This conclusion is agreed by the accuracy values shown above. AdaBoostClassifier is an ensemble of weak classifiers which focus on training data points that were previously misclassified each time to reduce bias. Although it might have larger variance, but in our case we try to reduce the noises by preprocessing. Therefore, AdaBoostClassifier produces good performance. Also, two SVC classifiers do not generate good accuracies because they sometimes have convergence issue due the lack of iterations.",,,,

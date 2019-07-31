@@ -1,0 +1,59 @@
+
+Discussion :
+
+By testing with distinct values of max iterations for EM step, the BLEU scores starts to become stable
+when the max iterations equals to 10. I tried with 2, 5, 10, 20, 50 and notice that the BLEU scores 
+have much differences as max_iter equals to 2 , 5, and 10 while it becomes quite stable as max_iter
+equals to 10, 20, and 50. Therefore, I choose 10 as the value for max_iter.
+
+Based on the way to build the AM model, we only consider one-to-one word alignment and ignore 
+the semantics and grammar of the language. Thus, when translating french sentence into English, 
+the words are translated into the french order and not follows the English grammar and semantics.
+Therefore, the bigram and trigram BLEU scores are not as good as the unigram produces for any training 
+size, where higher BLEU score represents a better match between references and candidate. This makes 
+sense since as the token gets longer (n gets bigger), the order of the words (semantics and grammar) 
+becomes more important and the probability of the occurrence of the token in the references would be 
+less. Therefore, the BLEU score would be smaller and even could be zero which means that the candidate 
+and the references do not match at all. Moreover, for the unigram case, based on the results, the BLEU 
+scores gets better as the number of training data increases in general, which makes sense since the 
+probability of having “correct” alignment would be higher as more training data given. Also, for each
+the training size, the BLEU score decreases as n increases and the reason is explained before.
+
+In comparison of the references, some reference would be more biased than others and having more 
+references may not produce better BLEU scores. The quality of the references are essential. If 
+we produce more references with high quality, then our BLEU score would get higher and more matches 
+would be found. If more random references are given, then the BLEU would have a chance to get worse. 
+Hence, the quality is much more essential than the quantity.
+
+
+
+----------Evaluation START----------
+
+### Evaluating AM model: 1000 ### 
+
+BLEU scores with N-gram (n) = 1: 	 0.4118	 0.4444	 0.5385	 0.4286	 0.5385	 0.6000	 0.3846	 0.6250	 0.3750	 0.3000	 0.5385	 0.4286	 0.5000	 0.4444	 0.4615	 0.6667	 0.5000	 0.5789	 0.3077	 0.6000	 0.6250	 0.6364	 0.4286	 0.5000	 0.3750
+BLEU scores with N-gram (n) = 2: 	 0.2269	 0.2357	 0.2996	 0.1816	 0.2996	 0.4472	 0.1790	 0.4226	 0.0000	 0.0000	 0.3669	 0.2568	 0.2133	 0.2287	 0.2378	 0.5505	 0.3333	 0.3610	 0.1601	 0.4047	 0.4226	 0.5045	 0.3145	 0.2970	 0.2315
+BLEU scores with N-gram (n) = 3: 	 0.0000	 0.0000	 0.0000	 0.0000	 0.0000	 0.3684	 0.0000	 0.0000	 0.0000	 0.0000	 0.2304	 0.0000	 0.0000	 0.1484	 0.0000	 0.3928	 0.2404	 0.0000	 0.0000	 0.2646	 0.0000	 0.3047	 0.2020	 0.1767	 0.0000
+
+
+### Evaluating AM model: 10000 ### 
+
+BLEU scores with N-gram (n) = 1: 	 0.3529	 0.4444	 0.5385	 0.5000	 0.5385	 0.6000	 0.3846	 0.6250	 0.5000	 0.4000	 0.6154	 0.3571	 0.5000	 0.5000	 0.5385	 0.5833	 0.6000	 0.6316	 0.3846	 0.6000	 0.7500	 0.7273	 0.5000	 0.5000	 0.3750
+BLEU scores with N-gram (n) = 2: 	 0.1485	 0.2357	 0.2996	 0.1961	 0.2118	 0.4472	 0.1790	 0.5175	 0.0000	 0.2108	 0.3922	 0.2344	 0.2133	 0.2970	 0.3146	 0.4606	 0.4472	 0.3770	 0.1790	 0.4047	 0.5669	 0.6030	 0.3397	 0.2970	 0.2315
+BLEU scores with N-gram (n) = 3: 	 0.0000	 0.0000	 0.0000	 0.0000	 0.0000	 0.3684	 0.0000	 0.3547	 0.0000	 0.0000	 0.2409	 0.0000	 0.0000	 0.1767	 0.1976	 0.2768	 0.3684	 0.0000	 0.0000	 0.2646	 0.3770	 0.4323	 0.2126	 0.1767	 0.0000
+
+
+### Evaluating AM model: 15000 ### 
+
+BLEU scores with N-gram (n) = 1: 	 0.4118	 0.4444	 0.4615	 0.5000	 0.5385	 0.6000	 0.4615	 0.7500	 0.3750	 0.4000	 0.6154	 0.3571	 0.6000	 0.5000	 0.5385	 0.5833	 0.6000	 0.6316	 0.3846	 0.6000	 0.7500	 0.7273	 0.5000	 0.4444	 0.3750
+BLEU scores with N-gram (n) = 2: 	 0.1604	 0.2357	 0.2774	 0.1961	 0.2118	 0.4472	 0.1961	 0.6547	 0.0000	 0.2108	 0.3922	 0.2344	 0.2336	 0.2970	 0.3146	 0.4606	 0.4472	 0.3770	 0.1790	 0.4047	 0.5669	 0.6030	 0.3397	 0.2801	 0.2315
+BLEU scores with N-gram (n) = 3: 	 0.0000	 0.0000	 0.0000	 0.0000	 0.0000	 0.3684	 0.0000	 0.5228	 0.0000	 0.0000	 0.2409	 0.0000	 0.0000	 0.1767	 0.1976	 0.2768	 0.3684	 0.0000	 0.0000	 0.2646	 0.3770	 0.4323	 0.2126	 0.1699	 0.0000
+
+
+### Evaluating AM model: 30000 ### 
+
+BLEU scores with N-gram (n) = 1: 	 0.4118	 0.5556	 0.4615	 0.5000	 0.3077	 0.6000	 0.4615	 0.6250	 0.3750	 0.3000	 0.6154	 0.2857	 0.5000	 0.5000	 0.5385	 0.4167	 0.5000	 0.5263	 0.3846	 0.4000	 0.8750	 0.6364	 0.5000	 0.3889	 0.3750
+BLEU scores with N-gram (n) = 2: 	 0.1604	 0.2635	 0.2774	 0.1961	 0.1601	 0.4472	 0.1961	 0.4226	 0.0000	 0.0000	 0.3922	 0.1482	 0.2133	 0.2970	 0.3146	 0.2752	 0.4082	 0.2666	 0.2532	 0.1908	 0.7906	 0.5045	 0.3397	 0.2139	 0.2315
+BLEU scores with N-gram (n) = 3: 	 0.0000	 0.0000	 0.0000	 0.0000	 0.0000	 0.3684	 0.0000	 0.3099	 0.0000	 0.0000	 0.2409	 0.0000	 0.0000	 0.1767	 0.1976	 0.1964	 0.3467	 0.0000	 0.0000	 0.0000	 0.6786	 0.3047	 0.2126	 0.0000	 0.0000
+
+----------Evaluation END----------

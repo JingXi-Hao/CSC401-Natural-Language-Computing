@@ -1,0 +1,41 @@
+### Perplexity For English Model ### 
+
+delta = 0.0 and perplexity = 13.812379296166718 # this is the perplexity without smoothing
+
+delta = 0.0001 and perplexity = 42.6768768169194
+delta = 0.0005 and perplexity = 39.76411801839957
+delta = 0.0008 and perplexity = 39.244439006428046
+delta = 0.001 and perplexity = 39.0667588399016
+delta = 0.005 and perplexity = 39.60280938717696
+delta = 0.008 and perplexity = 40.587795871154796
+delta = 0.01 and perplexity = 41.23361099232551
+delta = 0.05 and perplexity = 50.735291079375614
+delta = 0.08 and perplexity = 55.82857889625736
+delta = 0.1 and perplexity = 58.77901515757809
+delta = 0.5 and perplexity = 96.32404179637781
+delta = 0.7 and perplexity = 109.84481744813702
+delta = 0.9 and perplexity = 121.9464106855379
+delta = 1.0 and perplexity = 127.61476545596655
+
+
+
+### Perplexity For French Model ### 
+
+delta = 0.0 and perplexity = 13.580043227089208 # this is the perplexity without smoothing
+
+delta = 0.0001 and perplexity = 37.83425636532794
+delta = 0.0005 and perplexity = 35.978574495371774
+delta = 0.0008 and perplexity = 35.772440051179494
+delta = 0.001 and perplexity = 35.7461695469317
+delta = 0.005 and perplexity = 37.473024418409096
+delta = 0.008 and perplexity = 38.86180081754371
+delta = 0.01 and perplexity = 39.71347361354421
+delta = 0.05 and perplexity = 51.178299008385565
+delta = 0.08 and perplexity = 57.12876592947827
+delta = 0.1 and perplexity = 60.56550105554724
+delta = 0.5 and perplexity = 104.83275413405067
+delta = 0.7 and perplexity = 121.13655479890362
+delta = 0.9 and perplexity = 135.88027746367268
+delta = 1.0 and perplexity = 142.83090914938572
+
+As you can see above, the pure MLE method, which means no smoothing added produced the lowest perplexity. This indicates that MLE algorithm produces better results than add-smooth algorithm does. This is because the log probability is ignored when its value equals to negative infinity. Therefore, the unseen language are being ignored, which significantly reduces the perplexity. In comparison, add-smooth algorithm takes the unseen language into consideration and increases the perplexity. This makes sense since the model is trained by using training data and tested by using test data that is distinct with the training data. Thus, the unseen language issue is reasonable. Based on the way how those two algorithms work, the MLE in this case would generates better results. In addition, the perplexity decreases to a minimal and increases again for both English and French cases. This is because the delta at first is able to balance the unseen events that helps to reduce the effect of the unseen events on the perplexity while as more unseen language appeared, the delta added could not balance the issue and its effect gets weaker, which results in the increase in the perplexity.

@@ -1,1 +1,2 @@
-# CSC401-Natural-Language-Computing
+# CSC401/2511 - Natural Language Computing
+This course presents an introduction to natural language computing in applications such as information retrieval and extraction, intelligent web searching, speech recognition, and machine translation. These applications will involve various statistical and machine learning techniques.
